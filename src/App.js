@@ -1,15 +1,17 @@
-import React from 'react';
-import Header from './components/Header';
-import ImageGrid from './components/ImageGrid';
+import React from "react";
+import { Provider } from "react-redux";
+import Header from "./components/Header";
+import ImageGrid from "./components/ImageGrid";
 
-
+import configureStore from "./store";
+const store = configureStore();
 
 function App() {
   return (
-    <div>
-    <Header/>
-    <ImageGrid/>
-    </div>
+    <Provider store={store}>
+      <Header />
+      <ImageGrid />
+    </Provider>
   );
 }
 
