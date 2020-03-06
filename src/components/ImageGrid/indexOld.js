@@ -42,14 +42,11 @@ class ImageGrid extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  const { isLoading, images, error } = state;
-  return {
-    isLoading,
-    images,
-    error
-  };
-};
+const mapStateToProps = ({ isLoading, images, error }) => ({
+  isLoading,
+  images,
+  error
+});
 
 const mapDispatchToProps = dispatch => ({
   loadImages: () => dispatch(loadImages())
