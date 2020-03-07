@@ -4,39 +4,28 @@ import { connect } from "react-redux";
 import { loadImages } from "../../actions";
 
 import "./styles.css";
-
-const key = "5f96323678d05ff0c4eb264ef184556868e303b32a2db88ecbf15746e6f25e02";
+import Button from "../Button";
 
 class ImageGrid extends Component {
-  state = {
-    images: []
-  };
-
-  componentDidMount() {
-    fetch(`https://api.unsplash.com/photos/?client_id=${key}&per_page=28`)
-      .then(res => res.json())
-      .then(images => {
-        this.setState({
-          images
-        });
-      });
-  }
-
   render() {
-    const { images } = this.state;
+    const { isLoading, images, error } = this.props;
     return (
       <div className="content">
-        <section className="grid">
-          {images.map(image => (
-            <div
-              key={image.id}
-              className={`item item-${Math.ceil(image.height / image.width)}`}
-            >
-              <img src={image.urls.small} alt={image.user.username} />
-            </div>
-          ))}
-          <a onClick={this.props.loadImages}>Load Images</a>
-        </section>
+        {images.length > 0 && (
+          <section className="grid">
+            {images.map(image => (
+              <div
+                key={image.id}
+                className={`item item-${Math.ceil(image.height / image.width)}`}
+              >
+                <img src={image.urls.small} alt={image.user.username} />
+              </div>
+            ))}
+            <a onClick={this.props.loadImages}>Load Images</a>
+          </section>
+        )}
+        {error && <div className="error">{JSON.stringify(error)}</div>}
+        <Button onClick={() => !isLoading && loadImages()} loading={isLoading} />
       </div>
     );
   }
