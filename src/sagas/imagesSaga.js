@@ -3,8 +3,6 @@ import { IMAGES } from "../constansts";
 import { fetchImages } from "../api";
 import { setImages, setError } from "../actions";
 
-import Button from '../components/Button';
-
 const getPage = state => state.nextPage;
 
 function* handleImagesLoad() {

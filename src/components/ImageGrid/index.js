@@ -7,25 +7,33 @@ import "./styles.css";
 import Button from "../Button";
 
 class ImageGrid extends Component {
+
   render() {
-    const { isLoading, images, error } = this.props;
+    const { isLoading, images, error, loadImages } = this.props;
+
     return (
       <div className="content">
-        {images.length > 0 && (
-          <section className="grid">
-            {images.map(image => (
+        <section className="grid">
+          {images.map(image => {
+            console.log(image.id);
+            
+            return (
               <div
                 key={image.id}
                 className={`item item-${Math.ceil(image.height / image.width)}`}
               >
                 <img src={image.urls.small} alt={image.user.username} />
               </div>
-            ))}
-            <a onClick={this.props.loadImages}>Load Images</a>
-          </section>
-        )}
+            );
+          })}
+        </section>
+
         {error && <div className="error">{JSON.stringify(error)}</div>}
-        <Button onClick={() => !isLoading && loadImages()} loading={isLoading} />
+        <Button
+          onClick={() => loadImages()}
+          children="Load Images"
+          loading={isLoading}
+        />
       </div>
     );
   }
