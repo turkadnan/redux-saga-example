@@ -5,23 +5,22 @@ import { loadImages } from "../../actions";
 
 import "./styles.css";
 import Button from "../Button";
+import Stats from "../Stats";
 
 class ImageGrid extends Component {
-
   render() {
-    const { isLoading, images, error, loadImages } = this.props;
+    const { isLoading, images, error, loadImages,imageStats } = this.props;
 
     return (
       <div className="content">
         <section className="grid">
           {images.map(image => {
-            console.log(image.id);
-            
             return (
               <div
                 key={image.id}
                 className={`item item-${Math.ceil(image.height / image.width)}`}
               >
+                <Stats stats={imageStats} />
                 <img src={image.urls.small} alt={image.user.username} />
               </div>
             );
