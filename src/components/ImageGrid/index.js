@@ -39,6 +39,7 @@ class ImageGrid extends Component {
 }
 
 const mapStateToProps = state => {
+  //state reducer dan geliyor reducers/index.js
   const { isLoading, images, error } = state;
   return {
     isLoading,
